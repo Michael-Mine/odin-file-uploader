@@ -1,0 +1,198 @@
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/* 2. Remove default margin */
+*:not(dialog) {
+  margin: 0;
+}
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+body {
+  /* 4. Add accessible line-height */
+  line-height: 1.5;
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+/* 6. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/* 7. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/* 8. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+/*
+  10. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+/* My CSS declaration Order
+    Positioning
+    Display
+    Colour
+    Text
+    Other */
+
+/* montserrat-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/montserrat-v29-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* montserrat-700 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./fonts/montserrat-v29-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* lato-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/lato-v24-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lato-italic - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lato";
+  font-style: italic;
+  font-weight: 400;
+  src: url("./fonts/lato-v24-latin-italic.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lato-700 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./fonts/montserrat-v29-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: #783192;
+  padding: 1.5em;
+}
+
+a {
+  padding: 10px;
+  color: #242424;
+  font-size: 1.8em;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: #59bcc8;
+  background-color: #783192;
+}
+
+.my-logo {
+  height: 50px;
+  width: 121px;
+}
+
+.home-icon,
+.github-logo {
+  height: 50px;
+  width: 50px;
+
+  filter: invert(78%) sepia(35%) saturate(624%) hue-rotate(137deg)
+    brightness(84%) contrast(84%);
+}
+
+.home-icon:hover,
+.github-logo:hover {
+  filter: invert(92%) sepia(2%) saturate(870%) hue-rotate(147deg)
+    brightness(108%) contrast(88%);
+}
+
+body {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: lightgrey;
+  text-align: center;
+  font-family: "Lato", system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  margin-top: 1.5rem;
+  color: #242424;
+  font-size: 3em;
+  line-height: 1.1;
+  font-family: "Montserrat", system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+h2 {
+  margin: 10px;
+}
+
+ul {
+  padding: 20px;
+}
+
+li {
+  margin-bottom: 15px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
+  background-color: #e5e5e5;
+  list-style: none;
+  text-align: left;
+}
+
+p {
+  margin: 10px;
+}
