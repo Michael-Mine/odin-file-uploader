@@ -8,8 +8,6 @@
     
     <% if (locals.user) {%>
       <h2>Welcome Back <%= user.firstname %></h2>
-      <a href="/new-post">New Post</a>
-      <a href="/join">Become a Member</a>
       <a href="/log-out">LOG OUT</a>
       
     <% } else { %>
@@ -23,24 +21,5 @@
       </form>
     <%}%>
 
-    <ol>
-      <% posts.forEach((post) => { %>
-        <li>
-          <p><%= post.title %></p>
-          <p><%= post.text %></p>
-          <% if (locals.user && locals.user.member) {%>
-            <p>By <%= post.firstname %> <%= post.lastname %> on <%= post.added %></p>
-          <% } %>
-          
-          <% if (locals.user && locals.user.admin) {%>
-            <form action="/delete" method="POST">
-              <input type="hidden" name="postID" value="<%= post.id %>" />
-              <button type="submit">Delete Post</button>
-            </form>
-          <% } %>
-        </li>
-        <br>
-      <% }); %>
-    </ol>
   </body>
 </html>
