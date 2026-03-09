@@ -1,6 +1,6 @@
-const db = require("../db/queries");
 const { body, validationResult, matchedData } = require("express-validator");
 const bcrypt = require("bcryptjs");
+const { prisma } = require("../lib/prisma.js");
 
 const lengthErr = "must be between 1 and 40 characters.";
 const emailErr = "must be an email address";
@@ -19,13 +19,13 @@ const validateSignUpPost = [
     .isEmail()
     .withMessage(`Email ${emailErr}`)
     .isLength({ min: 1, max: 40 })
-    .withMessage(`Name ${lengthErr}`)
-    .custom(async (value) => {
-      const user = await db.checkUserExists(value);
-      if (user[0]) {
-        throw new Error("Email is already in use");
-      }
-    }),
+    .withMessage(`Name ${lengthErr}`),
+  // .custom(async (value) => {
+  //   const user = await db.checkUserExists(value);
+  //   if (user[0]) {
+  //     throw new Error("Email is already in use");
+  //   }
+  // }),
   body("password")
     .trim()
     .isLength({ min: 1, max: 40 })
@@ -48,13 +48,17 @@ const signUpPost = [
       });
     }
     try {
+      const { firstName, lastName, username } = matchedData(req);
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
-      await db.insertUser({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        username: req.body.username,
-        hashedPassword,
+      const user = await prisma.user.create({
+        data: {
+          firstName,
+          lastName,
+          username,
+          password: hashedPassword,
+        },
       });
+      console.log("Created user:", user);
       res.redirect("/");
     } catch (err) {
       console.error(err);
