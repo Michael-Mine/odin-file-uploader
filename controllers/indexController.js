@@ -1,4 +1,4 @@
-async function getAllPosts(req, res) {
+async function getFiles(req, res) {
   res.render("index", {
     title: "File Uploader",
     user: req.user,
@@ -13,6 +13,6 @@ function signUpGet(req, res) {
 }
 
 module.exports = {
-  getAllPosts,
+  getFiles,
   signUpGet,
 };
