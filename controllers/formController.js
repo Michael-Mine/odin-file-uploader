@@ -19,13 +19,15 @@ const validateSignUpPost = [
     .isEmail()
     .withMessage(`Email ${emailErr}`)
     .isLength({ min: 1, max: 40 })
-    .withMessage(`Name ${lengthErr}`),
-  // .custom(async (value) => {
-  //   const user = await db.checkUserExists(value);
-  //   if (user[0]) {
-  //     throw new Error("Email is already in use");
-  //   }
-  // }),
+    .withMessage(`Name ${lengthErr}`)
+    .custom(async (value) => {
+      const user = await prisma.user.findUnique({
+        where: { username: value },
+      });
+      if (user) {
+        throw new Error("Email is already in use");
+      }
+    }),
   body("password")
     .trim()
     .isLength({ min: 1, max: 40 })

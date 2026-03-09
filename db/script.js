@@ -1,16 +1,11 @@
-import { prisma } from "../lib/prisma.js";
+const { prisma } = require("../lib/prisma.js");
 
 async function main() {
   // Create a new user with a post
-  const user = await prisma.user.create({
-    data: {
-      firstName: "Mr",
-      lastName: "Mine",
-      username: "m@m.net",
-      password: "123",
-    },
+  const user = await prisma.user.findUnique({
+    where: { username: "m@.net" },
   });
-  console.log("Created user:", user);
+  console.log("Found user:", user);
 }
 
 main()
