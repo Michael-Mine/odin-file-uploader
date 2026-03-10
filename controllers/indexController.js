@@ -12,7 +12,15 @@ function signUpGet(req, res) {
   });
 }
 
+function uploadGet(req, res) {
+  res.render("forms/upload", {
+    title: "Upload File",
+    user: req.user,
+  });
+}
+
 module.exports = {
   getFiles,
   signUpGet,
+  uploadGet,
 };
