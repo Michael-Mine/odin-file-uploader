@@ -20,6 +20,13 @@ function signUpGet(req, res) {
   });
 }
 
+function addFolderGet(req, res) {
+  res.render("forms/addFolder", {
+    title: "Create a Folder",
+    user: req.user,
+  });
+}
+
 function uploadGet(req, res) {
   res.render("forms/upload", {
     title: "Upload File",
@@ -30,5 +37,6 @@ function uploadGet(req, res) {
 module.exports = {
   getFolders,
   signUpGet,
+  addFolderGet,
   uploadGet,
 };
