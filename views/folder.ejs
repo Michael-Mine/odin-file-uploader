@@ -4,19 +4,12 @@
   <body>
     <%- include("./partials/nav.ejs") %>
 
-    <h1><%= title %></h1>
+    
     
     <% if (locals.user) {%>
-      <h2>Welcome Back <%= user.firstName %></h2>
-      <a href="/upload">Upload a File</a>
-      <a href="/log-out">LOG OUT</a>
-      <ol>
-        <% userFolders.forEach((folder) => { %>
-          <li>
-            <a href="/folder/<%= folder.cuid %>"><%= folder.name %></a>
-          </li>
-        <% }); %>
-      </ol>
+      <h1><%= title %> Folder</h1>
+
+      
     <% } else { %>
       <form action="/log-in" method="POST">
         <label for="username">Email:</label>
