@@ -6,7 +6,7 @@ const formController = require("../controllers/formController");
 const passportController = require("../controllers/passportController");
 const uploadController = require("../controllers/uploadController");
 
-indexRouter.get("/", indexController.getFiles);
+indexRouter.get("/", indexController.getFolders);
 indexRouter.get("/sign-up", indexController.signUpGet);
 
 indexRouter.post("/sign-up", formController.signUpPost);

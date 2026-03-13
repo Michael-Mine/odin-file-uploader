@@ -4,8 +4,6 @@ const app = express();
 const path = require("node:path");
 const assetsPath = path.join(__dirname, "public");
 
-const indexRouter = require("./routes/indexRouter");
-
 const expressSession = require("express-session");
 const passport = require("passport");
 
@@ -15,6 +13,10 @@ const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const connectionString = `${process.env.DATABASE_URL}`;
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
+
+const fileRouter = require("./routes/fileRouter");
+const folderRouter = require("./routes/folderRouter");
+const indexRouter = require("./routes/indexRouter");
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -39,6 +41,8 @@ app.use(passport.session());
 app.use(express.static(assetsPath));
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/file", fileRouter);
+app.use("/folder", folderRouter);
 app.use("/", indexRouter);
 
 app.use((err, req, res, next) => {

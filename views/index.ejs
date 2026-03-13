@@ -10,8 +10,13 @@
       <h2>Welcome Back <%= user.firstName %></h2>
       <a href="/upload">Upload a File</a>
       <a href="/log-out">LOG OUT</a>
-
-      
+      <ol>
+        <% userFolders.forEach((folder) => { %>
+          <li>
+            <a href="/folder/"><%= folder.name %></a>
+          </li>
+        <% }); %>
+      </ol>
     <% } else { %>
       <form action="/log-in" method="POST">
         <label for="username">Email:</label>

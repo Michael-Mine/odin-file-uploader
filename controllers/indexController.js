@@ -1,7 +1,15 @@
-async function getFiles(req, res) {
+const { prisma } = require("../lib/prisma");
+
+async function getFolders(req, res) {
+  const userFolders = await prisma.folder.findMany({
+    where: { userId: req.user.id },
+  });
+  console.log(userFolders);
+
   res.render("index", {
     title: "File Uploader",
     user: req.user,
+    userFolders,
   });
 }
 
@@ -20,7 +28,7 @@ function uploadGet(req, res) {
 }
 
 module.exports = {
-  getFiles,
+  getFolders,
   signUpGet,
   uploadGet,
 };
