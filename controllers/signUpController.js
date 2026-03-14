@@ -2,6 +2,13 @@ const { body, validationResult, matchedData } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const { prisma } = require("../lib/prisma.js");
 
+function signUpGet(req, res) {
+  res.render("forms/signUp", {
+    title: "Sign Up",
+    user: req.user,
+  });
+}
+
 const lengthErr = "must be between 1 and 40 characters.";
 const emailErr = "must be an email address";
 
@@ -70,5 +77,6 @@ const signUpPost = [
 ];
 
 module.exports = {
+  signUpGet,
   signUpPost,
 };

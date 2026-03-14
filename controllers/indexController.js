@@ -19,13 +19,6 @@ async function getFolders(req, res) {
   }
 }
 
-function signUpGet(req, res) {
-  res.render("forms/signUp", {
-    title: "Sign Up",
-    user: req.user,
-  });
-}
-
 function addFolderGet(req, res) {
   res.render("forms/addFolder", {
     title: "Create a Folder",
