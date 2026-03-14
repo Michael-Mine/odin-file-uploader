@@ -71,8 +71,39 @@ const updateFolderPost = [
   },
 ];
 
+async function deleteFolderGet(req, res) {
+  if (!req.user) {
+    res.status(401).redirect("/");
+  } else {
+    const folder = await prisma.folder.findFirst({
+      where: { userId: req.user.id, cuid: req.params.folderCuid },
+    });
+    res.render("forms/deleteFolder", {
+      user: req.user,
+      folder,
+    });
+  }
+}
+
+async function deleteFolderPost(req, res) {
+  if (!req.user) {
+    res.status(401).redirect("/");
+  } else {
+    const folder = await prisma.folder.findFirst({
+      where: { userId: req.user.id, cuid: req.params.folderCuid },
+    });
+    const deleteFolder = await prisma.folder.delete({
+      where: { id: folder.id },
+    });
+    console.log("Deleted folder:", deleteFolder);
+    res.redirect("/");
+  }
+}
+
 module.exports = {
   getFolder,
   updateFolderGet,
   updateFolderPost,
+  deleteFolderGet,
+  deleteFolderPost,
 };

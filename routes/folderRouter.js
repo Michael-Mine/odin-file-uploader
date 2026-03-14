@@ -10,6 +10,8 @@ folderRouter.get("/:folderCuid/update", folderController.updateFolderGet);
 folderRouter.post("/:folderCuid/update", folderController.updateFolderPost);
 
 //delete folder - get/post in folderController
+folderRouter.get("/:folderCuid/delete", folderController.deleteFolderGet);
+folderRouter.post("/:folderCuid/delete", folderController.deleteFolderPost);
 
 //create file (upload) - get/post in folderController?
 

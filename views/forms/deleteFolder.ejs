@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../partials/head.ejs") %>
+  <body>
+    <%- include("../partials/nav.ejs") %>
+
+    <h1>Delete <%= folder.name %> Folder</h1>
+    <p>Are you sure you want to delete <%= folder.name %>?</p>
+
+    <form method="POST" action="/folder/<%= folder.cuid %>/delete">
+      <button type="submit">Delete</button>
+    </form>
+  </body>
+</html>
