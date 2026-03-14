@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../partials/head.ejs") %>
+  <body>
+    <%- include("../partials/nav.ejs") %>
+
+    <h1><%= folder.name %> Folder</h1>
+
+    <a href="/log-out">LOG OUT</a>
+
+    <form method="POST" action="/folder/<%= folder.cuid %>/update">
+      <p class="input-container">
+        <label for="name">Folder Rename:</label>
+        <input type="text" name="name" id="name" value="<%= folder.name %>" />
+      </p>
+
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

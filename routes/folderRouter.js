@@ -6,6 +6,8 @@ const folderController = require("../controllers/folderController");
 folderRouter.get("/:folderCuid", folderController.getFolder);
 
 //update folder (change name) - get/post in folderController
+folderRouter.get("/:folderCuid/update", folderController.updateFolderGet);
+folderRouter.post("/:folderCuid/update", folderController.updateFolderPost);
 
 //delete folder - get/post in folderController
 

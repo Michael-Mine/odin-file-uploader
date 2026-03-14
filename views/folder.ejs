@@ -4,6 +4,10 @@
   <body>
     <%- include("./partials/nav.ejs") %>
 
-    <h1><%= title %> Folder</h1>
+    <h1><%= folder.name %> Folder</h1>
+
+    <a href="/folder/<%= folder.cuid %>/update"
+      >Rename <%= folder.name %> Folder</a
+    >
   </body>
 </html>
