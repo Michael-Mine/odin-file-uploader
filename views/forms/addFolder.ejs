@@ -5,33 +5,18 @@
     <%- include("../partials/nav.ejs") %>
 
     <h1><%= title %></h1>
-    
-    <% if (locals.user) {%>
-      <a href="/log-out">LOG OUT</a>
 
-      <%- include("../partials/errors.ejs") %>
+    <a href="/log-out">LOG OUT</a>
 
-      <form method="POST" action="/add-folder">
+    <%- include("../partials/errors.ejs") %>
+
+    <form method="POST" action="/add-folder">
       <p class="input-container">
         <label for="name">Folder Name:</label>
         <input type="text" name="name" id="name" />
       </p>
-      
+
       <button type="submit">Submit</button>
     </form>
-      
-    <% } else { %>
-      <h2>You need to log in to Create a folder!</h2>
-      
-      <form action="/log-in" method="POST">
-        <label for="username">Email:</label>
-        <input id="username" name="username" type="text" />
-        <label for="password">Password:</label>
-        <input id="password" name="password" type="password" />
-        <button type="submit">Log In</button>
-        <a href="/sign-up">Sign Up!</a>
-      </form>
-    <%}%>
-
   </body>
 </html>

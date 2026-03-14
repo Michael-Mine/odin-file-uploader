@@ -20,10 +20,16 @@ async function getFolders(req, res) {
 }
 
 function addFolderGet(req, res) {
-  res.render("forms/addFolder", {
-    title: "Create a Folder",
-    user: req.user,
-  });
+  if (!req.user) {
+    res.render("index", {
+      title: "File Uploader",
+    });
+  } else {
+    res.render("forms/addFolder", {
+      title: "Create a Folder",
+      user: req.user,
+    });
+  }
 }
 
 function uploadGet(req, res) {
