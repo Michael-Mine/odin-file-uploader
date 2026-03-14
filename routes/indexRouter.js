@@ -11,7 +11,7 @@ const uploadController = require("../controllers/uploadController");
 indexRouter.get("/", indexController.getFolders);
 
 indexRouter.get("/add-folder", indexController.addFolderGet);
-// indexRouter.post("/add-folder", formController.addFolderPost);
+indexRouter.post("/add-folder", indexController.addFolderPost);
 
 indexRouter.post("/log-in", authController.logInPost);
 indexRouter.get("/log-out", authController.logOutGet);

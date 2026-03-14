@@ -1,3 +1,4 @@
+const { body, validationResult, matchedData } = require("express-validator");
 const { prisma } = require("../lib/prisma");
 
 async function getFolders(req, res) {
@@ -32,6 +33,42 @@ function addFolderGet(req, res) {
   }
 }
 
+const lengthErr = "must be between 1 and 40 characters.";
+const validateAddFolderPost = [
+  body("name")
+    .trim()
+    .isLength({ min: 1, max: 40 })
+    .withMessage(`Folder Name ${lengthErr}`),
+];
+
+const addFolderPost = [
+  validateAddFolderPost,
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render("forms/addFolder", {
+        title: "Create a Folder",
+        user: req.user,
+        errors: errors.array(),
+      });
+    }
+    try {
+      const { name } = matchedData(req);
+      const folder = await prisma.folder.create({
+        data: {
+          userId: req.user.id,
+          name,
+        },
+      });
+      console.log("Created folder:", folder);
+      res.redirect("/");
+    } catch (err) {
+      console.error(err);
+      return next(err);
+    }
+  },
+];
+
 function uploadGet(req, res) {
   res.render("forms/upload", {
     title: "Upload File",
@@ -41,7 +78,7 @@ function uploadGet(req, res) {
 
 module.exports = {
   getFolders,
-  signUpGet,
   addFolderGet,
+  addFolderPost,
   uploadGet,
 };

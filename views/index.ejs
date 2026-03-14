@@ -8,9 +8,11 @@
     
     <% if (locals.user) {%>
       <h2>Welcome Back <%= user.firstName %></h2>
+      <a class="log-out" href="/log-out">LOG OUT</a>
+      <br>
       <a href="/add-folder">Create a Folder</a>
       <a href="/upload">Upload a File</a>
-      <a href="/log-out">LOG OUT</a>
+      
       <ol>
         <% userFolders.forEach((folder) => { %>
           <li>
