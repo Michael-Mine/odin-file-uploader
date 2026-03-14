@@ -1,16 +1,22 @@
 const { prisma } = require("../lib/prisma");
 
 async function getFolders(req, res) {
-  const userFolders = await prisma.folder.findMany({
-    where: { userId: req.user.id },
-  });
-  console.log(userFolders);
+  if (!req.user) {
+    res.render("index", {
+      title: "File Uploader",
+    });
+  } else {
+    const userFolders = await prisma.folder.findMany({
+      where: { userId: req.user.id },
+    });
+    console.log(userFolders);
 
-  res.render("index", {
-    title: "File Uploader",
-    user: req.user,
-    userFolders,
-  });
+    res.render("index", {
+      title: "File Uploader",
+      user: req.user,
+      userFolders,
+    });
+  }
 }
 
 function signUpGet(req, res) {
