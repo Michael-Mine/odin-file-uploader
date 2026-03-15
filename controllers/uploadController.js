@@ -22,7 +22,19 @@ const uploadPost = [
     uploadFile(req, res, next);
   },
   async (req, res) => {
+    const folder = await prisma.folder.findFirst({
+      where: { userId: req.user.id, cuid: req.params.folderCuid },
+    });
     console.log(req.file);
+    const file = await prisma.file.create({
+      data: {
+        name: req.file.originalname,
+        size: req.file.size,
+        url: req.file.path,
+        folderId: folder.id,
+      },
+    });
+    console.log("Created file:", file);
     res.redirect("/");
   },
 ];
