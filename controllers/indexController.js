@@ -67,16 +67,8 @@ const addFolderPost = [
   },
 ];
 
-function uploadGet(req, res) {
-  res.render("forms/upload", {
-    title: "Upload File",
-    user: req.user,
-  });
-}
-
 module.exports = {
   getFolders,
   addFolderGet,
   addFolderPost,
-  uploadGet,
 };

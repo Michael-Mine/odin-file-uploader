@@ -4,30 +4,19 @@
   <body>
     <%- include("../partials/nav.ejs") %>
 
-    <h1><%= title %></h1>
-    
-    <% if (locals.user) {%>
-      <a href="/log-out">LOG OUT</a>
+    <h1>Upload File to <%= folder.name %> Folder</h1>
 
-      <h2>Select a file to Upload</h2>
+    <a href="/log-out">LOG OUT</a>
 
-      <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="uploaded_file">
-        <button type="submit">Upload</button>
-      </form>
-      
-    <% } else { %>
-      <h2>You need to log in to upload files!</h2>
-      
-      <form action="/log-in" method="POST">
-        <label for="username">Email:</label>
-        <input id="username" name="username" type="text" />
-        <label for="password">Password:</label>
-        <input id="password" name="password" type="password" />
-        <button type="submit">Log In</button>
-        <a href="/sign-up">Sign Up!</a>
-      </form>
-    <%}%>
+    <h2>Select a file to Upload</h2>
 
+    <form
+      action="/folder/<%= folder.cuid %>/upload"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <input type="file" name="uploaded_file" />
+      <button type="submit">Upload</button>
+    </form>
   </body>
 </html>
