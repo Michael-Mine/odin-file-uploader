@@ -89,8 +89,52 @@ const updateFilePost = [
   },
 ];
 
+async function deleteFileGet(req, res) {
+  if (!req.user) {
+    res.status(401).redirect("/");
+  } else {
+    const file = await prisma.folder.findFirst({
+      where: { userId: req.user.id },
+      include: {
+        files: {
+          where: {
+            cuid: req.params.fileCuid,
+          },
+        },
+      },
+    });
+    res.render("forms/deleteFile", {
+      file,
+    });
+  }
+}
+
+async function deleteFilePost(req, res) {
+  if (!req.user) {
+    res.status(401).redirect("/");
+  } else {
+    const file = await prisma.folder.findFirst({
+      where: { userId: req.user.id },
+      include: {
+        files: {
+          where: {
+            cuid: req.params.fileCuid,
+          },
+        },
+      },
+    });
+    const deleteFile = await prisma.file.delete({
+      where: { id: file.files[0].id },
+    });
+    console.log("Deleted file:", deleteFile);
+    res.redirect("/");
+  }
+}
+
 module.exports = {
   getFile,
   updateFileGet,
   updateFilePost,
+  deleteFileGet,
+  deleteFilePost,
 };

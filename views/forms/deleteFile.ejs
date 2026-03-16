@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../partials/head.ejs") %>
+  <body>
+    <%- include("../partials/nav.ejs") %>
+
+    <h1>Delete: <%= file.files[0].name %></h1>
+    <p>Are you sure you want to delete: <%= file.files[0].name %>?</p>
+
+    <form method="POST" action="/file/<%= file.files[0].cuid %>/delete">
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

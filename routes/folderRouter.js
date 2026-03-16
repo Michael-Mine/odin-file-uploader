@@ -14,4 +14,7 @@ folderRouter.post("/:folderCuid/delete", folderController.deleteFolderPost);
 folderRouter.get("/:folderCuid/upload", uploadController.uploadGet);
 folderRouter.post("/:folderCuid/upload", uploadController.uploadPost);
 
+//share folder? - get/post in folderController
+//generate a link - new share model & route?
+
 module.exports = folderRouter;
