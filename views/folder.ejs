@@ -17,5 +17,21 @@
     <a href="/folder/<%= folder.cuid %>/delete"
       >Delete <%= folder.name %> Folder</a
     >
+
+    <ol>
+      <% files.forEach((file) => { %>
+        <li>
+          <a href="/file/<%= file.cuid %>"><%= file.name %></a>
+          <span>
+            <% if (file.size <= 1024000 ) { %>
+              <%= (file.size / 1000).toFixed(1) %> kB
+            <% } else { %>
+              <%= (file.size / 1024000 ).toFixed(1) %> MB
+            <% } %>
+          </span>
+        </li>
+      <% }); %>
+    </ol>
+
   </body>
 </html>
