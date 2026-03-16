@@ -14,10 +14,11 @@ async function getFile(req, res) {
         },
       },
     });
+    console.log(file);
+    res.render("file", {
+      file,
+    });
   }
-  res.render("file", {
-    file,
-  });
 }
 
 module.exports = {
