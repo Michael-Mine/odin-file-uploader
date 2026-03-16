@@ -3,7 +3,7 @@ const fileRouter = Router();
 const fileController = require("../controllers/fileController");
 
 //read file - get in fileController
-fileRouter.get("/:fileId", fileController.getFile);
+fileRouter.get("/:fileCuid", fileController.getFile);
 
 //update file (change name) - get/post in fileController
 

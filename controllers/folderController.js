@@ -7,14 +7,11 @@ async function getFolder(req, res) {
   } else {
     const folder = await prisma.folder.findFirst({
       where: { userId: req.user.id, cuid: req.params.folderCuid },
-    });
-    const files = await prisma.file.findMany({
-      where: { folderId: folder.id },
+      include: { files: true },
     });
     res.render("folder", {
       user: req.user,
       folder,
-      files,
     });
   }
 }
