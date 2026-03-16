@@ -47,7 +47,6 @@ const updateFolderPost = [
 
     if (!errors.isEmpty()) {
       return res.status(400).render("forms/updateFolder", {
-        user: req.user,
         folder,
         errors: errors.array(),
       });

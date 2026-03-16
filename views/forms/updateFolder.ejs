@@ -6,6 +6,8 @@
 
     <h1><%= folder.name %> Folder</h1>
 
+    <%- include("../partials/errors.ejs") %>
+
     <form method="POST" action="/folder/<%= folder.cuid %>/update">
       <p class="input-container">
         <label for="name">Folder Rename:</label>

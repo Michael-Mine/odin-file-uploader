@@ -6,6 +6,8 @@ const fileController = require("../controllers/fileController");
 fileRouter.get("/:fileCuid", fileController.getFile);
 
 //update file (change name) - get/post in fileController
+fileRouter.get("/:fileCuid/update", fileController.updateFileGet);
+fileRouter.post("/:fileCuid/update", fileController.updateFilePost);
 
 //delete file - get/post in fileController
 

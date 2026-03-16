@@ -3,13 +3,8 @@
   <%- include("./partials/head.ejs") %>
   <body>
     <%- include("./partials/nav.ejs") %>
-
     <h1><%= file.files[0].name %></h1>
-
-    <p>
-      Uploaded on <%= file.files[0].uploadedAt %>
-    </p>
-
+    <p> Uploaded on <%= file.files[0].uploadedAt %></p>
     <p> Size: 
       <% if (file.files[0].size <= 1024000 ) { %>
         <%= (file.files[0].size / 1000).toFixed(1) %> kB
@@ -17,7 +12,12 @@
         <%= (file.files[0].size / 1024000 ).toFixed(1) %> MB
       <% } %>
     </p>
-
-    <button>Download File</button>
+       <button>Download File</button>
+       <a href="/file/<%= file.files[0].cuid %>/update"
+        >Rename File</a
+      >
+      <a href="/file/<%= file.files[0].cuid %>/delete"
+        >Delete File</a
+      >
   </body>
 </html>
