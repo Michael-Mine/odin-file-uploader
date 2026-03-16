@@ -10,7 +10,6 @@ async function getFolder(req, res) {
       include: { files: true },
     });
     res.render("folder", {
-      user: req.user,
       folder,
     });
   }
@@ -24,7 +23,6 @@ async function updateFolderGet(req, res) {
       where: { userId: req.user.id, cuid: req.params.folderCuid },
     });
     res.render("forms/updateFolder", {
-      user: req.user,
       folder,
     });
   }
@@ -80,7 +78,6 @@ async function deleteFolderGet(req, res) {
       where: { userId: req.user.id, cuid: req.params.folderCuid },
     });
     res.render("forms/deleteFolder", {
-      user: req.user,
       folder,
     });
   }

@@ -10,7 +10,6 @@ async function uploadGet(req, res) {
       where: { userId: req.user.id, cuid: req.params.folderCuid },
     });
     res.render("forms/upload", {
-      user: req.user,
       folder,
     });
   }

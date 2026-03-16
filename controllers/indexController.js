@@ -26,7 +26,6 @@ function addFolderGet(req, res) {
   } else {
     res.render("forms/addFolder", {
       title: "Create a Folder",
-      user: req.user,
     });
   }
 }

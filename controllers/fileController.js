@@ -15,7 +15,9 @@ async function getFile(req, res) {
       },
     });
   }
-  // res.render("file");
+  res.render("file", {
+    file,
+  });
 }
 
 module.exports = {
