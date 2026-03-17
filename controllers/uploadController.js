@@ -1,6 +1,13 @@
-const { prisma } = require("../lib/prisma");
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+const { createClient } = require("@supabase/supabase-js");
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_KEY,
+);
+const { prisma } = require("../lib/prisma");
 
 async function uploadGet(req, res) {
   if (!req.user) {
@@ -21,22 +28,53 @@ const uploadPost = [
     uploadFile(req, res, next);
   },
   async (req, res) => {
-    const folder = await prisma.folder.findFirst({
-      where: { userId: req.user.id, cuid: req.params.folderCuid },
-    });
     console.log(req.file);
-    const file = await prisma.file.create({
-      data: {
-        name: req.file.originalname,
-        size: req.file.size,
-        url: req.file.path,
-        folderId: folder.id,
-      },
-    });
-    console.log("Created file:", file);
-    res.redirect("/");
+
+    const { data, error } = await supabase.storage
+      .from("odin-file-uploader")
+      .upload(req.file.originalname, req.file.buffer, {
+        cacheControl: "3600",
+        upsert: false,
+      });
+
+    // const dataPath = data.path;
+
+    // const supabaseUrl = process.env.SUPABASE_URL +
+
+    // https://pcrierdhvpxvlmydrfty.supabase.co/storage/v1/object/public/odin-file-uploader/I%20was%20on%20the%20road%20crossing.txt
+
+    console.log(data);
+    if (error) {
+      throw error;
+    } else {
+      // const { data } = supabase.storage
+      // .from("odin-file-uploader")
+      // .getPublicUrl(dataPath);
+
+      const folder = await prisma.folder.findFirst({
+        where: { userId: req.user.id, cuid: req.params.folderCuid },
+      });
+      const file = await prisma.file.create({
+        data: {
+          name: req.file.originalname,
+          size: req.file.size,
+          url: data.path,
+          folderId: folder.id,
+        },
+      });
+      console.log("Created file:", file);
+      res.redirect("/");
+    }
   },
 ];
+
+// const avatarFile = event.target.files[0];
+// const { data, error } = await supabase.storage
+//   .from("odin-file-uploader")
+//   .upload("public/avatar1.png", avatarFile, {
+//     cacheControl: "3600",
+//     upsert: false,
+//   });
 
 module.exports = {
   uploadGet,
