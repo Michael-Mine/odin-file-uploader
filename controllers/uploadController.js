@@ -37,19 +37,15 @@ const uploadPost = [
         upsert: false,
       });
 
-    // const dataPath = data.path;
-
-    // const supabaseUrl = process.env.SUPABASE_URL +
-
-    // https://pcrierdhvpxvlmydrfty.supabase.co/storage/v1/object/public/odin-file-uploader/I%20was%20on%20the%20road%20crossing.txt
+    const dataPath = data.path;
 
     console.log(data);
     if (error) {
       throw error;
     } else {
-      // const { data } = supabase.storage
-      // .from("odin-file-uploader")
-      // .getPublicUrl(dataPath);
+      const { data } = supabase.storage
+        .from("odin-file-uploader")
+        .getPublicUrl(dataPath);
 
       const folder = await prisma.folder.findFirst({
         where: { userId: req.user.id, cuid: req.params.folderCuid },
@@ -58,7 +54,7 @@ const uploadPost = [
         data: {
           name: req.file.originalname,
           size: req.file.size,
-          url: data.path,
+          url: data.publicUrl,
           folderId: folder.id,
         },
       });
