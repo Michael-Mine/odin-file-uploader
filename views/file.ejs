@@ -12,7 +12,10 @@
         <%= (file.files[0].size / 1024000 ).toFixed(1) %> MB
       <% } %>
     </p>
-       <button>Download File</button>
+       <a href="<%= file.files[0].url %>" 
+        target="_blank" >Download File</a
+      >
+
        <a href="/file/<%= file.files[0].cuid %>/update"
         >Rename File</a
       >

@@ -45,7 +45,9 @@ const uploadPost = [
     } else {
       const { data } = supabase.storage
         .from("odin-file-uploader")
-        .getPublicUrl(dataPath);
+        .getPublicUrl(dataPath, {
+          download: true,
+        });
 
       const folder = await prisma.folder.findFirst({
         where: { userId: req.user.id, cuid: req.params.folderCuid },
@@ -63,14 +65,6 @@ const uploadPost = [
     }
   },
 ];
-
-// const avatarFile = event.target.files[0];
-// const { data, error } = await supabase.storage
-//   .from("odin-file-uploader")
-//   .upload("public/avatar1.png", avatarFile, {
-//     cacheControl: "3600",
-//     upsert: false,
-//   });
 
 module.exports = {
   uploadGet,

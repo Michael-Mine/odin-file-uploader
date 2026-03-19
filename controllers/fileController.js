@@ -1,6 +1,12 @@
 const { prisma } = require("../lib/prisma");
 const { body, validationResult, matchedData } = require("express-validator");
 
+const { createClient } = require("@supabase/supabase-js");
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_KEY,
+);
+
 async function getFile(req, res) {
   if (!req.user) {
     res.status(401).redirect("/");
