@@ -1,13 +1,11 @@
 const multer = require("multer");
 const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
+const { prisma } = require("../lib/prisma");
 const { createClient } = require("@supabase/supabase-js");
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_KEY,
 );
-const { prisma } = require("../lib/prisma");
 
 async function uploadGet(req, res) {
   if (!req.user) {
@@ -21,6 +19,16 @@ async function uploadGet(req, res) {
     });
   }
 }
+
+const fileFilter = (req, file, cb) => {
+  if (file.size <= 5242880) {
+    cb(null, true);
+  } else {
+    cb(new Error("File exceeds max limit of 5MB!"), false);
+  }
+};
+
+const upload = multer({ storage: storage, fileFilter });
 
 const uploadPost = [
   (req, res, next) => {
