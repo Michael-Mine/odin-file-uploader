@@ -12,7 +12,7 @@
         <%= (file.files[0].size / 1024000 ).toFixed(1) %> MB
       <% } %>
     </p>
-       <a href="<%= file.files[0].url %>" 
+       <a href="<%= file.files[0].url %><%= file.files[0].name %>" 
         target="_blank" >Download File</a
       >
 
