@@ -14,6 +14,7 @@ const connectionString = `${process.env.DATABASE_URL}`;
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
+const shareRouter = require("./routes/shareRouter");
 const fileRouter = require("./routes/fileRouter");
 const folderRouter = require("./routes/folderRouter");
 const indexRouter = require("./routes/indexRouter");
@@ -41,6 +42,7 @@ app.use(passport.session());
 app.use(express.static(assetsPath));
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/share", shareRouter);
 app.use("/file", fileRouter);
 app.use("/folder", folderRouter);
 app.use("/", indexRouter);

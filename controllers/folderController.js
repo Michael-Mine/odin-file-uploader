@@ -23,11 +23,62 @@ async function shareFolderGet(req, res) {
       where: { userId: req.user.id, cuid: req.params.folderCuid },
       include: { files: true },
     });
+    const date = new Date();
     res.render("forms/shareFolder", {
       folder,
+      date,
     });
   }
 }
+
+const daysErr = "must be between 1 and 90 days.";
+const validateShareFolderPost = [
+  body("duration")
+    .trim()
+    .isInt({ min: 1, max: 90 })
+    .withMessage(`Duration ${daysErr}`),
+];
+
+const shareFolderPost = [
+  validateShareFolderPost,
+  async (req, res, next) => {
+    if (!req.user) {
+      res.status(401).redirect("/");
+    } else {
+      const errors = validationResult(req);
+
+      const folder = await prisma.folder.findFirst({
+        where: { userId: req.user.id, cuid: req.params.folderCuid },
+        include: { files: true },
+      });
+
+      if (!errors.isEmpty()) {
+        return res.status(400).render("forms/shareFolder", {
+          folder,
+          errors: errors.array(),
+        });
+      }
+      try {
+        const { duration } = matchedData(req);
+        const date = new Date();
+        date.setDate(date.getDate() + parseInt(duration));
+
+        const shareFolder = await prisma.folder.update({
+          where: { id: folder.id },
+          data: {
+            sharedExpire: date,
+          },
+        });
+
+        console.log("Shared folder:", shareFolder);
+        res.redirect("/share/" + folder.cuid);
+      } catch (err) {
+        console.error(err);
+        return next(err);
+      }
+    }
+  },
+];
 
 async function updateFolderGet(req, res) {
   if (!req.user) {
@@ -114,6 +165,7 @@ async function deleteFolderPost(req, res) {
 module.exports = {
   getFolder,
   shareFolderGet,
+  shareFolderPost,
   updateFolderGet,
   updateFolderPost,
   deleteFolderGet,

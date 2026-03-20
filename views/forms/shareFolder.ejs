@@ -7,6 +7,14 @@
     <h1>Share <%= folder.name %> Folder</h1>
     <p>Shared folders can be accessed by anyone with the link (max 90 days)</p>
 
+    <% if (folder.sharedExpire > date) {%>
+      <p>This folder is already shared until: <%= folder.sharedExpire %></p>
+      <a href="/share/<%= folder.cuid %>"
+        >Shared Folder</a
+      >
+      <p>Submit the form below to share a new duration from today</p>
+    <% } %>
+
     <form method="POST" action="/folder/<%= folder.cuid %>/share">
       <p class="input-container">
         <label for="duration">Folder share duration (days):</label>
@@ -14,5 +22,6 @@
       </p>
       <button type="submit">Submit</button>
     </form>
+    <%- include("../partials/errors.ejs") %>
   </body>
 </html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <%- include("./partials/nav.ejs") %>
+
+    <% if (folder.sharedExpire < date) {%>
+    <h1>Folder is no longer shared!</h1>
+
+    <% } else { %>
+      <h1><%= folder.name %> Folder</h1>
+      <p>This URL is shared until: <%= folder.sharedExpire %></p>
+
+      <ol>
+        <% folder.files.forEach((file) => { %>
+          <li>
+            <a href="/file/<%= file.cuid %>"><%= file.name %></a>
+            <span>
+              <% if (file.size <= 1024000 ) { %>
+                <%= (file.size / 1000).toFixed(1) %> kB
+              <% } else { %>
+                <%= (file.size / 1024000 ).toFixed(1) %> MB
+              <% } %>
+              <a href="<%= file.url %><%= file.name %>" 
+                target="_blank" >Download File</a
+              >
+            </span>
+          </li>
+        <% }); %>
+      </ol>
+    <%}%>
+  </body>
+</html>

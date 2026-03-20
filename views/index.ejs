@@ -16,6 +16,9 @@
         <% userFolders.forEach((folder) => { %>
           <li>
             <a href="/folder/<%= folder.cuid %>"><%= folder.name %></a>
+            <% if (folder.sharedExpire > date) {%>
+              <span>Shared until <%= folder.sharedExpire %></span>
+            <% } %>
           </li>
         <% }); %>
       </ol>

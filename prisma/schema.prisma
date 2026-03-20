@@ -30,12 +30,13 @@ model User {
 }
 
 model Folder {
-  id       Int    @id @default(autoincrement())
-  cuid     String @default(cuid(2))
-  name     String
-  user     User   @relation(fields: [userId], references: [id])
-  userId   Int
-  files    File[]
+  id            Int    @id @default(autoincrement())
+  cuid          String @default(cuid(2))
+  name          String
+  user          User   @relation(fields: [userId], references: [id])
+  userId        Int
+  files         File[]
+  sharedExpire  DateTime?
 }
 
 model File {

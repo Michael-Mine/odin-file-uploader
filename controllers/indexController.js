@@ -10,10 +10,12 @@ async function getFolders(req, res) {
     const userFolders = await prisma.folder.findMany({
       where: { userId: req.user.id },
     });
+    const date = new Date();
     res.render("index", {
       title: "File Uploader",
       user: req.user,
       userFolders,
+      date,
     });
   }
 }
