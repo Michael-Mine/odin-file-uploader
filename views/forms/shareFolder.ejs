@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../partials/head.ejs") %>
+  <body>
+    <%- include("../partials/nav.ejs") %>
+
+    <h1>Share <%= folder.name %> Folder</h1>
+    <p>Shared folders can be accessed by anyone with the link (max 90 days)</p>
+
+    <form method="POST" action="/folder/<%= folder.cuid %>/share">
+      <p class="input-container">
+        <label for="duration">Folder share duration (days):</label>
+        <input type="number" name="duration" id="duration" min="1" max="90" />
+      </p>
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

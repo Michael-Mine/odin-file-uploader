@@ -15,6 +15,20 @@ async function getFolder(req, res) {
   }
 }
 
+async function shareFolderGet(req, res) {
+  if (!req.user) {
+    res.status(401).redirect("/");
+  } else {
+    const folder = await prisma.folder.findFirst({
+      where: { userId: req.user.id, cuid: req.params.folderCuid },
+      include: { files: true },
+    });
+    res.render("forms/shareFolder", {
+      folder,
+    });
+  }
+}
+
 async function updateFolderGet(req, res) {
   if (!req.user) {
     res.status(401).redirect("/");
@@ -99,6 +113,7 @@ async function deleteFolderPost(req, res) {
 
 module.exports = {
   getFolder,
+  shareFolderGet,
   updateFolderGet,
   updateFolderPost,
   deleteFolderGet,
