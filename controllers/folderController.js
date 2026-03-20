@@ -9,6 +9,9 @@ async function getFolder(req, res) {
       where: { userId: req.user.id, cuid: req.params.folderCuid },
       include: { files: true },
     });
+    if (!folder) {
+      throw new CustomNotFoundError("Folder not found");
+    }
     res.render("folder", {
       folder,
     });
@@ -23,6 +26,9 @@ async function shareFolderGet(req, res) {
       where: { userId: req.user.id, cuid: req.params.folderCuid },
       include: { files: true },
     });
+    if (!folder) {
+      throw new CustomNotFoundError("Folder not found");
+    }
     const date = new Date();
     res.render("forms/shareFolder", {
       folder,
@@ -87,6 +93,9 @@ async function updateFolderGet(req, res) {
     const folder = await prisma.folder.findFirst({
       where: { userId: req.user.id, cuid: req.params.folderCuid },
     });
+    if (!folder) {
+      throw new CustomNotFoundError("Folder not found");
+    }
     res.render("forms/updateFolder", {
       folder,
     });
@@ -141,6 +150,9 @@ async function deleteFolderGet(req, res) {
     const folder = await prisma.folder.findFirst({
       where: { userId: req.user.id, cuid: req.params.folderCuid },
     });
+    if (!folder) {
+      throw new CustomNotFoundError("Folder not found");
+    }
     res.render("forms/deleteFolder", {
       folder,
     });

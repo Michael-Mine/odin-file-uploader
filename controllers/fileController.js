@@ -21,6 +21,9 @@ async function getFile(req, res) {
         },
       },
     });
+    if (!file) {
+      throw new CustomNotFoundError("File not found");
+    }
     res.render("file", {
       file,
     });
@@ -41,6 +44,9 @@ async function updateFileGet(req, res) {
         },
       },
     });
+    if (!file) {
+      throw new CustomNotFoundError("File not found");
+    }
     res.render("forms/updateFile", {
       file,
     });
@@ -109,6 +115,9 @@ async function deleteFileGet(req, res) {
         },
       },
     });
+    if (!file) {
+      throw new CustomNotFoundError("File not found");
+    }
     res.render("forms/deleteFile", {
       file,
     });

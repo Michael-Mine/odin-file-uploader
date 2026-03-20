@@ -5,6 +5,9 @@ async function getShareFolder(req, res) {
     where: { cuid: req.params.folderCuid },
     include: { files: true },
   });
+  if (!folder) {
+    throw new CustomNotFoundError("Folder not found");
+  }
   const date = new Date();
   res.render("openFolder", {
     folder,
