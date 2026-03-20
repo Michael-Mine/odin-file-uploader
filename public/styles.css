@@ -196,3 +196,10 @@ li {
 p {
   margin: 10px;
 }
+
+.links {
+  margin-left: 30px;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+}

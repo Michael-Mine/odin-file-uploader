@@ -6,21 +6,20 @@
 
     <h1><%= folder.name %> Folder</h1>
 
-    <a href="/folder/<%= folder.cuid %>/upload"
-      >Upload</a
-    >
-
-    <a href="/folder/<%= folder.cuid %>/share"
-      >Share</a
-    >
-
-    <a href="/folder/<%= folder.cuid %>/update"
-      >Rename</a
-    >
-
-    <a href="/folder/<%= folder.cuid %>/delete"
-      >Delete</a
-    >
+    <div class="links">
+      <a href="/folder/<%= folder.cuid %>/upload"
+        >Upload</a
+      >
+      <a href="/folder/<%= folder.cuid %>/share"
+        >Share</a
+      >
+      <a href="/folder/<%= folder.cuid %>/update"
+        >Rename</a
+      >
+      <a href="/folder/<%= folder.cuid %>/delete"
+        >Delete</a
+      >
+    </div>
 
     <ol>
       <% folder.files.forEach((file) => { %>

@@ -12,15 +12,16 @@
         <%= (file.files[0].size / 1024000 ).toFixed(1) %> MB
       <% } %>
     </p>
+    <div class="links">
        <a href="<%= file.files[0].url %><%= file.files[0].name %>" 
         target="_blank" >Download File</a
       >
-
        <a href="/file/<%= file.files[0].cuid %>/update"
         >Rename File</a
       >
       <a href="/file/<%= file.files[0].cuid %>/delete"
         >Delete File</a
       >
+    </div>
   </body>
 </html>
