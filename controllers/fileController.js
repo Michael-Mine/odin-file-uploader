@@ -1,4 +1,4 @@
-const { prisma } = require("../lib/prisma");
+const { prisma } = require("../lib/prisma.js");
 const { body, validationResult, matchedData } = require("express-validator");
 
 const { createClient } = require("@supabase/supabase-js");

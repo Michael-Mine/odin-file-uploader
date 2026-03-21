@@ -1,5 +1,5 @@
 const { body, validationResult, matchedData } = require("express-validator");
-const { prisma } = require("../lib/prisma");
+const { prisma } = require("../lib/prisma.js");
 
 async function getFolders(req, res) {
   if (!req.user) {

@@ -1,6 +1,6 @@
 const multer = require("multer");
 const storage = multer.memoryStorage();
-const { prisma } = require("../lib/prisma");
+const { prisma } = require("../lib/prisma.js");
 const { createClient } = require("@supabase/supabase-js");
 const supabase = createClient(
   process.env.SUPABASE_URL,

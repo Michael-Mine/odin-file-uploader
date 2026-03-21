@@ -1,4 +1,4 @@
-const { prisma } = require("../lib/prisma");
+const { prisma } = require("../lib/prisma.js");
 
 async function getShareFolder(req, res) {
   const folder = await prisma.folder.findFirst({
