@@ -2,7 +2,7 @@
   "name": "odin-file-uploader",
   "version": "1.0.0",
   "description": "An File Uploader App from The Odin Project.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
