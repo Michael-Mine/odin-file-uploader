@@ -20,15 +20,7 @@ async function uploadGet(req, res) {
   }
 }
 
-const fileFilter = (req, file, cb) => {
-  if (file.size <= 5242880) {
-    cb(null, true);
-  } else {
-    cb(new Error("File exceeds max limit of 5MB!"), false);
-  }
-};
-
-const upload = multer({ storage: storage, fileFilter });
+const upload = multer({ storage: storage, limits: { fileSize: 5242880 } });
 
 const uploadPost = [
   (req, res, next) => {
