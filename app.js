@@ -7,12 +7,8 @@ const assetsPath = path.join(__dirname, "public");
 const expressSession = require("express-session");
 const passport = require("passport");
 
-const { PrismaPg } = require("@prisma/adapter-pg");
-const { PrismaClient } = require("./generated/prisma/client");
+const { prisma } = require("./lib/prisma.js");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
-const connectionString = `${process.env.DATABASE_URL}`;
-const adapter = new PrismaPg({ connectionString });
-const prisma = new PrismaClient({ adapter });
 
 const shareRouter = require("./routes/shareRouter");
 const fileRouter = require("./routes/fileRouter");
