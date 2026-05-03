@@ -86,7 +86,7 @@ model File {
 **1. Clone & Install:**
 
 ```bash
-git clone https://github.com/Mikael92002/file_uploader.git
+git clone https://github.com/Michael-Mine/odin-file-uploader.git
 
 npm install
 ```
